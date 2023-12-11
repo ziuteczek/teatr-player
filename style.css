@@ -1,0 +1,28 @@
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  position: relative;
+  background-color: black;
+  height: 100svh;
+  width: 100vw;
+}
+video {
+  display: block;
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+}
+.current-video {
+  position: absolute;
+  opacity: 0;
+  color: aliceblue;
+  bottom: 10%;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 50px;
+}
