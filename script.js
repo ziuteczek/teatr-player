@@ -40,10 +40,16 @@ document.addEventListener("keydown", (e) => {
       if (videoEl.currentTime > 5) {
         videoEl.currentTime -= 5;
       }
+      else {
+        videoEl.currentTime = 0;
+      }
       break;
     case "ArrowRight":
       if (videoEl.currentTime + 5 < videoEl.duration) {
         videoEl.currentTime += 5;
+      }
+      else {
+        videoEl.currentTime = videoEl.duration
       }
       break;
     case "KeyS":
