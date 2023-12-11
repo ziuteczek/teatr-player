@@ -12,7 +12,6 @@ const vidURLs = [
 videoEl.src = vidURLs[0];
 showCurrVidEl.textContent = vidURLs[0];
 
-
 videoEl.currentTime = 0.1;
 
 function changeVid(index) {
@@ -38,15 +37,31 @@ document.addEventListener("keydown", (e) => {
       videoEl.pause();
       break;
     case "ArrowLeft":
-      if (currVid !== 0) changeVid(--currVid);
+      if (videoEl.currentTime > 5) {
+        videoEl.currentTime -= 5;
+      }
       break;
     case "ArrowRight":
-      if (vidURLs.length - 1 !== currVid) changeVid(++currVid);
+      if (videoEl.currentTime + 5 < videoEl.duration) {
+        videoEl.currentTime += 5;
+      }
       break;
     case "KeyS":
       if (showCurrVidEl.style.opacity === "1")
         showCurrVidEl.style.opacity = "0";
       else showCurrVidEl.style.opacity = "1";
+      break;
+    case "KeyH":
+      if (document.body.style.cursor === "none") {
+        document.body.style.cursor = "auto";
+      } else {
+        document.body.style.cursor = "none";
+      }
+    case "Comma":
+      if (currVid !== 0) changeVid(--currVid);
+      break;
+    case "Period":
+      if (vidURLs.length - 1 !== currVid) changeVid(++currVid); 
       break;
   }
   console.log(e.code);
