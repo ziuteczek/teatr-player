@@ -26,3 +26,13 @@ video {
   transform: translateX(-50%);
   font-size: 50px;
 }
+.video-bar {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%;
+    bottom: 0;
+}
+.video-bar {
+    display: none;
+}

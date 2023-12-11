@@ -9,4 +9,4 @@
 + > - Następny klip
 + SPACJA - Zapałzowanie klipu
 + Strzałka w lewo - 5 sekund do tyłu
-+ Strzałka w prawo - 5 sekund do przodu
+- Strzałka w prawo - 5 sekund do przodu

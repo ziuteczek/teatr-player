@@ -2,6 +2,7 @@
 
 const videoEl = document.querySelector("video");
 const showCurrVidEl = document.querySelector(".current-video");
+const playBarEl = document.querySelector(".video-bar");
 
 let currVid = 0;
 const vidURLs = [
@@ -18,6 +19,7 @@ function changeVid(index) {
   videoEl.src = vidURLs[index];
   showCurrVidEl.textContent = vidURLs[index];
   videoEl.currentTime = 0.1;
+  playBarEl.max = videoEl.duration;
 }
 
 function playPause() {
@@ -40,7 +42,7 @@ document.addEventListener("keydown", (e) => {
       if (videoEl.currentTime > 5) {
         videoEl.currentTime -= 5;
       } else {
-        videoEl.currentTime = 0.1   ;
+        videoEl.currentTime = 0.1;
       }
       break;
     case "ArrowRight":
@@ -51,9 +53,13 @@ document.addEventListener("keydown", (e) => {
       }
       break;
     case "KeyS":
-      if (showCurrVidEl.style.opacity === "1")
+      if (showCurrVidEl.style.opacity === "1") {
         showCurrVidEl.style.opacity = "0";
-      else showCurrVidEl.style.opacity = "1";
+        playBarEl.style.display = "none";
+      } else {
+        showCurrVidEl.style.opacity = "1";
+        playBarEl.style.display = "block";
+      }
       break;
     case "KeyH":
       if (document.body.style.cursor === "none") {
@@ -69,4 +75,22 @@ document.addEventListener("keydown", (e) => {
       break;
   }
   console.log(e.code);
+});
+function updateProgressBar() {
+  const progress = (videoEl.currentTime / videoEl.duration) * 100;
+  playBarEl.value = progress;
+}
+
+function changeVid(index) {
+  videoEl.src = vidURLs[index];
+  showCurrVidEl.textContent = vidURLs[index];
+  videoEl.currentTime = 0.1;
+  playBarEl.max = videoEl.duration;
+  updateProgressBar();
+}
+videoEl.addEventListener("timeupdate", updateProgressBar);
+
+playBarEl.addEventListener("input", function () {
+  const seekTime = (playBarEl.value / 100) * videoEl.duration;
+  videoEl.currentTime = seekTime;
 });
