@@ -5,12 +5,19 @@ const showCurrVidEl = document.querySelector(".current-video");
 
 let currVid = 0;
 const vidURLs = [
-  "./files/video/1.mp4",
+  "./files/video/ROBLOX death sound origin.mp4",
   "./files/video/Gragas wytacza beczkę - greenscreen.mp4",
 ];
 
+videoEl.src = vidURLs[0];
+showCurrVidEl.textContent = vidURLs[0];
+
+
+videoEl.currentTime = 0.1;
+
 function changeVid(index) {
   videoEl.src = vidURLs[index];
+  showCurrVidEl.textContent = vidURLs[index];
   videoEl.currentTime = 0.1;
 }
 
