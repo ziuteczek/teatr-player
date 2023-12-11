@@ -39,17 +39,15 @@ document.addEventListener("keydown", (e) => {
     case "ArrowLeft":
       if (videoEl.currentTime > 5) {
         videoEl.currentTime -= 5;
-      }
-      else {
-        videoEl.currentTime = 0;
+      } else {
+        videoEl.currentTime = 0.1   ;
       }
       break;
     case "ArrowRight":
       if (videoEl.currentTime + 5 < videoEl.duration) {
         videoEl.currentTime += 5;
-      }
-      else {
-        videoEl.currentTime = videoEl.duration
+      } else {
+        videoEl.currentTime = videoEl.duration;
       }
       break;
     case "KeyS":
@@ -67,7 +65,7 @@ document.addEventListener("keydown", (e) => {
       if (currVid !== 0) changeVid(--currVid);
       break;
     case "Period":
-      if (vidURLs.length - 1 !== currVid) changeVid(++currVid); 
+      if (vidURLs.length - 1 !== currVid) changeVid(++currVid);
       break;
   }
   console.log(e.code);
