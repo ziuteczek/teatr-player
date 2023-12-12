@@ -1,52 +1,52 @@
 *,
 *::before,
 *::after {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
 }
 body {
-  position: relative;
-  background-color: black;
-  height: 100svh;
-  width: 100vw;
+	position: relative;
+	background-color: black;
+	height: 100svh;
+	width: 100vw;
 }
 video {
-  display: block;
-  height: 100%;
-  width: 100%;
-  object-fit: cover;
+	display: block;
+	height: 100%;
+	width: 100%;
+	object-fit: contain;
 }
 .current-video {
-  position: absolute;
-  opacity: 0;
-  color: aliceblue;
-  bottom: 10%;
-  left: 50%;
-  transform: translateX(-50%);
-  font-size: 50px;
+	position: absolute;
+	opacity: 0;
+	color: aliceblue;
+	bottom: 10%;
+	left: 50%;
+	transform: translateX(-50%);
+	font-size: 50px;
 }
 .video-bar {
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 90%;
-    bottom: 0;
+	position: absolute;
+	left: 50%;
+	transform: translateX(-50%);
+	width: 90%;
+	bottom: 0;
 }
 .video-bar {
-    display: none;
+	display: none;
 }
 .video-shadowing {
-  position: absolute;
-  transition: opacity 1s;
-  width: 100%;
-  height: 100%;
-  top: 0;
-  background-color: black;
+	position: absolute;
+	transition: opacity 1s;
+	width: 100%;
+	height: 100%;
+	top: 0;
+	background-color: black;
 }
 .hidden {
-  opacity: 0;
+	opacity: 0;
 }
 .shown {
-  opacity: 1;
+	opacity: 1;
 }
