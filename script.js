@@ -18,13 +18,6 @@ showCurrVidEl.textContent = vidURLs[0];
 
 videoEl.currentTime = 0.1;
 
-function changeVid(index) {
-  videoEl.src = vidURLs[index];
-  showCurrVidEl.textContent = vidURLs[index];
-  videoEl.currentTime = 0.1;
-  playBarEl.max = videoEl.duration;
-}
-
 function playPause() {
   if (videoEl.paused) {
     videoEl.play();
@@ -39,6 +32,7 @@ document.addEventListener("keydown", (e) => {
       break;
     case "KeyR":
       videoEl.currentTime = 0;
+      hideVid();
       videoEl.pause();
       break;
     case "ArrowLeft":
@@ -78,12 +72,11 @@ document.addEventListener("keydown", (e) => {
       break;
     case "Period":
       if (vidURLs.length - 1 !== currVid) {
-        changeVid(++currVid);
         hideVid();
+        changeVid(++currVid);
       }
       break;
   }
-  console.log(e.code);
 });
 function updateProgressBar() {
   const progress = (videoEl.currentTime / videoEl.duration) * 100;
@@ -91,11 +84,15 @@ function updateProgressBar() {
 }
 
 function changeVid(index) {
-  videoEl.src = vidURLs[index];
-  showCurrVidEl.textContent = vidURLs[index];
-  videoEl.currentTime = 0.1;
-  playBarEl.max = videoEl.duration;
-  updateProgressBar();
+  lowerSound();
+  setTimeout(() => {
+    videoEl.src = vidURLs[index];
+    showCurrVidEl.textContent = vidURLs[index];
+    videoEl.currentTime = 0.1;
+    playBarEl.max = videoEl.duration;
+    updateProgressBar();
+  }, 3000);
+  videoEl.volume = 1;
 }
 videoEl.addEventListener("timeupdate", updateProgressBar);
 
@@ -108,6 +105,7 @@ videoEl.addEventListener("ended", () => {
   hideVid();
 });
 videoEl.addEventListener("play", () => {
+  videoEl.volume = 1;
   showVid();
 });
 const hideVid = () => {
@@ -117,4 +115,14 @@ const hideVid = () => {
 const showVid = () => {
   videoHider.classList.add("hidden");
   videoHider.classList.remove("shown");
+};
+const lowerSound = (lowerTo = 0) => {
+  let vol = 1000;
+  const sound = setInterval(() => {
+    if (vol <= 0 + lowerTo) {
+      clearInterval(sound);
+    }
+    vol -= 10;
+    videoEl.volume = vol <= 0 ? 0 : vol / 1000;
+  }, 30);
 };
