@@ -36,3 +36,17 @@ video {
 .video-bar {
     display: none;
 }
+.video-shadowing {
+  position: absolute;
+  transition: opacity 1s;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  background-color: black;
+}
+.hidden {
+  opacity: 0;
+}
+.shown {
+  opacity: 1;
+}
