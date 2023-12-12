@@ -7,7 +7,7 @@ const videoHider = document.querySelector(".video-shadowing");
 
 let currVid = 0;
 const vidURLs = [
-  "./files/video/Współczesna kolęda - Słowo, co się stało Ciałem.mp4",
+  "./files/video/Wspolczesna_kolenda(edit).mp4",
   "./files/video/Ave Verum by Albinoni (Adagio in G Minor).mp4",
   "./files/video/Bóg jest Miłością-(480p).mp4",
   "./files/video/Przybieżeli do Betlejem.mp4",

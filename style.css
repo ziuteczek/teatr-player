@@ -19,6 +19,7 @@ video {
 }
 .current-video {
 	position: absolute;
+	z-index: 2;
 	opacity: 0;
 	color: aliceblue;
 	bottom: 10%;
