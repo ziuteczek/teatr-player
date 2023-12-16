@@ -52,20 +52,11 @@ document.addEventListener('keydown', e => {
 			}
 			break
 		case 'KeyS':
-			if (showCurrVidEl.style.opacity === '1') {
-				showCurrVidEl.style.opacity = '0'
-				playBarEl.style.display = 'none'
-			} else {
-				showCurrVidEl.style.opacity = '1'
-				playBarEl.style.display = 'block'
-			}
+      dataVisibility();
 			break
 		case 'KeyH':
-			if (document.body.style.cursor === 'none') {
-				document.body.style.cursor = 'auto'
-			} else {
-				document.body.style.cursor = 'none'
-			}
+      hideCoursor()
+      break;
 		case 'Comma':
 			if (currVid !== 0) {
 				changeVid(--currVid)
@@ -86,6 +77,24 @@ function updateProgressBar() {
 }
 const isAudio = link => audioExtensions.includes(link.slice(link.lastIndexOf('.') + 1))
 
+const hideCoursor = () => {
+  if (document.body.style.cursor === 'none') {
+    document.body.style.cursor = 'auto'
+  } else {
+    document.body.style.cursor = 'none'
+  }
+}
+
+const dataVisibility = () => {
+  if (showCurrVidEl.style.opacity === '1') {
+    showCurrVidEl.style.opacity = '0'
+    playBarEl.style.display = 'none'
+  } else {
+    showCurrVidEl.style.opacity = '1'
+    playBarEl.style.display = 'block'
+  }
+}
+
 function changeVid(index) {
 	lowerSound()
 	setTimeout(() => {
@@ -100,6 +109,7 @@ function changeVid(index) {
 		videoEl.currentTime = 0.1
 		playBarEl.max = videoEl.duration
 		updateProgressBar()
+    console.log("Ready to play")
 	}, 10000)
 }
 videoEl.addEventListener('timeupdate', updateProgressBar)
