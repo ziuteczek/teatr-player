@@ -1,6 +1,6 @@
 'use strict'
 
-const videoEl = document.querySelector('video')
+let videoEl = document.querySelector('video')
 const showCurrVidEl = document.querySelector('.current-video')
 const playBarEl = document.querySelector('.video-bar')
 const videoHider = document.querySelector('.video-shadowing')
@@ -12,6 +12,8 @@ const vidURLs = [
 	'./files/video/Bóg jest Miłością-(480p).mp4',
 	'./files/video/Przybieżeli do Betlejem.mp4',
 ]
+
+var audioExtensions = ['mp3', 'ogg', 'wav', 'aac', 'flac']
 
 videoEl.src = vidURLs[0]
 showCurrVidEl.textContent = vidURLs[0]
@@ -82,12 +84,19 @@ function updateProgressBar() {
 	const progress = (videoEl.currentTime / videoEl.duration) * 100
 	playBarEl.value = progress
 }
+const isAudio = link => audioExtensions.includes(link.slice(link.lastIndexOf('.') + 1))
 
 function changeVid(index) {
 	lowerSound()
 	setTimeout(() => {
-		videoEl.src = vidURLs[index]
-		showCurrVidEl.textContent = vidURLs[index]
+		const vidURL = vidURLs[index]
+		if (isAudio(vidURL)) {
+			videoEl = document.querySelector('audio')
+		} else {
+			videoEl = document.querySelector('video')
+		}	
+		videoEl.src = vidURL
+		showCurrVidEl.textContent = vidURL
 		videoEl.currentTime = 0.1
 		playBarEl.max = videoEl.duration
 		updateProgressBar()
@@ -123,6 +132,6 @@ const lowerSound = (lowerTo = 0) => {
 		}
 		vol -= 2
 		videoEl.volume = vol <= 0 ? 0 : Number('0.' + `${vol}`.padStart(3, '0'))
-    if (vol % 100 === 0) console.log(videoEl.volume)
+		if (vol % 100 === 0) console.log(videoEl.volume)
 	}, 1)
 }
