@@ -6,17 +6,19 @@ const playBarEl = document.querySelector('.video-bar')
 const videoHider = document.querySelector('.video-shadowing')
 
 let currVid = 0
-const vidURLs = [
-	'./files/video/Wspolczesna_kolenda(edit).mp4',
-	'./files/video/Ave Verum by Albinoni (Adagio in G Minor).mp4',
-	'./files/video/Bóg jest Miłością-(480p).mp4',
-	'./files/video/Przybieżeli do Betlejem.mp4',
-]
+const vidURLs = {
+	getFileUrl:index => "./files/" + vidURLs.files[index],
+	files:[
+	'Wspolczesna_kolenda(edit).mp4',
+	'Ave Verum by Albinoni (Adagio in G Minor).mp4',
+	'Bóg jest Miłością-(480p).mp4',
+	'Przybieżeli do Betlejem.mp4']
+}
 
 var audioExtensions = ['mp3', 'ogg', 'wav', 'aac', 'flac']
 
-videoEl.src = vidURLs[0]
-showCurrVidEl.textContent = vidURLs[0]
+videoEl.src = vidURLs.getFileUrl(0)
+showCurrVidEl.textContent = vidURLs.getFileUrl(0)
 
 videoEl.currentTime = 0.1
 
@@ -64,7 +66,7 @@ document.addEventListener('keydown', e => {
 			}
 			break
 		case 'Period':
-			if (vidURLs.length - 1 !== currVid) {
+			if (vidURLs.files.length - 1 !== currVid) {
 				hideVid()
 				changeVid(++currVid)
 			}
@@ -95,10 +97,9 @@ const dataVisibility = () => {
   }
 }
 
-function changeVid(index) {
-	lowerSound()
-	setTimeout(() => {
-		const vidURL = vidURLs[index]
+async function changeVid(index) {
+	await lowerSound()
+		const vidURL = vidURLs.getFileUrl(index)
 		if (isAudio(vidURL)) {
 			videoEl = document.querySelector('audio')
 		} else {
@@ -109,8 +110,6 @@ function changeVid(index) {
 		videoEl.currentTime = 0.1
 		playBarEl.max = videoEl.duration
 		updateProgressBar()
-    console.log("Ready to play")
-	}, 10000)
 }
 videoEl.addEventListener('timeupdate', updateProgressBar)
 
@@ -135,13 +134,16 @@ const showVid = () => {
 	videoHider.classList.remove('shown')
 }
 const lowerSound = (lowerTo = 0) => {
-	let vol = 1000
+  return new Promise (resolve => {
+  let vol = 1000
 	const sound = setInterval(() => {
 		if (vol <= 0 + lowerTo) {
 			clearInterval(sound)
+      resolve()
 		}
 		vol -= 2
 		videoEl.volume = vol <= 0 ? 0 : Number('0.' + `${vol}`.padStart(3, '0'))
 		if (vol % 100 === 0) console.log(videoEl.volume)
 	}, 1)
+  })
 }
