@@ -13,14 +13,12 @@ let currVid = 0
 
 const vid = {
 	URL: [
-		'1. Słowo EDITED.mp3',
-		'2. Wspolczesna_kolenda(edit).mp4',
-		'3. Rozmowa EDIT.mp3',
-		'4. Ave Verum by Albinoni (Adagio in G Minor).mp4',
-		'5. Wzgardzony i odepchnięty 1 EDIT.mp3',
-		'6. Bóg jest Miłością-(480p).mp4',
-		'7. Umieram w twoim ubraniu.mp3.mp3',
-		'Przybieżeli do Betlejem.mp4',
+		'1. Wspolczesna_kolenda(edit).mp4',
+		'2. Rozmowa EDIT.mp3',
+		'3. Ave Verum by Albinoni (Adagio in G Minor).mp4',
+		'4. Bóg jest Miłością-(480p).mp4',
+		'5. Umieram w twoim ubraniu GITES MAJONEZ.mp3',
+		'6. Przybieżeli do Betlejem.mp4',
 	],
 	audioExtensions: ['mp3', 'ogg', 'wav', 'aac', 'flac'],
 	getFileUrl: index => './files/' + vid.URL[index],
@@ -102,6 +100,8 @@ document.addEventListener('keydown', e => {
 				hideVid()
 			}
 			break
+		case 'KeyP':
+			lowerSound(200)
 	}
 })
 const updateProgressBar = () => (playBarEl.value = (currentPlayer.currentTime / currentPlayer.duration) * 100)
@@ -168,7 +168,7 @@ const updatePlayer = vidLink => {
 updatePlayer(vid.getFileUrl(0))
 const lowerSound = (lowerTo = 0) => {
 	return new Promise(resolve => {
-		let vol = 1000
+		let vol = 1000 * currentPlayer.volume
 		const sound = setInterval(() => {
 			if (vol <= 0 + lowerTo) {
 				clearInterval(sound)
