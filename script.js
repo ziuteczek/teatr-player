@@ -13,7 +13,7 @@ let currVid = 0
 
 const vid = {
 	URL:[
-		"0. Wspolczesna_kolenda(edit).mp4","1 Słowo EDITED.mp3","2. Bóg jest Miłością-(480p).mp4","3. Ave Verum by Albinoni (Adagio in G Minor).mp4","4. Rozmowa EDIT.mp3","4. Wzgardzony i odepchnięty 1 EDIT.mp3","5. Nie zapomnij o mnie 2.mp3","Przybieżeli do Betlejem.mp4"
+		"1. Słowo EDITED.mp3","2. Wspolczesna_kolenda(edit).mp4","3. Ave Verum by Albinoni (Adagio in G Minor).mp4","4. Rozmowa EDIT.mp3","5. Bóg jest Miłością-(480p).mp4","6. Wzgardzony i odepchnięty 1 EDIT.mp3","7. Umieram w twoim ubraniu.mp3","Przybieżeli do Betlejem.mp4"
 	],
 	audioExtensions:['mp3', 'ogg', 'wav', 'aac', 'flac'],
 	getFileUrl:index => "./files/" + vid.URL[index],
