@@ -2,8 +2,8 @@
 
 let currentPlayer = document.querySelector('video')
 
-const audioPlayer = document.querySelector("audio")
-const videoPlayer = document.querySelector("video")
+const audioPlayer = document.querySelector('audio')
+const videoPlayer = document.querySelector('video')
 
 const showCurrVidEl = document.querySelector('.current-video')
 const playBarEl = document.querySelector('.video-bar')
@@ -12,18 +12,24 @@ const videoHider = document.querySelector('.video-shadowing')
 let currVid = 0
 
 const vid = {
-	URL:[
-		"1. Słowo EDITED.mp3","2. Wspolczesna_kolenda(edit).mp4","3. Rozmowa EDIT.mp3","5. Bóg jest Miłością-(480p).mp4","4. Ave Verum by Albinoni (Adagio in G Minor).mp4","6. Wzgardzony i odepchnięty 1 EDIT.mp3","7. Umieram w twoim ubraniu.mp3","Przybieżeli do Betlejem.mp4"
+	URL: [
+		'1. Słowo EDITED.mp3',
+		'2. Wspolczesna_kolenda(edit).mp4',
+		'3. Rozmowa EDIT.mp3',
+		'4. Ave Verum by Albinoni (Adagio in G Minor).mp4',
+		'5. Bóg jest Miłością-(480p).mp4',
+		'6. Wzgardzony i odepchnięty 1 EDIT.mp3',
+		'7. Umieram w twoim ubraniu.mp3.mp3',
+		'Przybieżeli do Betlejem.mp4',
 	],
-	audioExtensions:['mp3', 'ogg', 'wav', 'aac', 'flac'],
-	getFileUrl:index => "./files/" + vid.URL[index],
-	isAudio:link => vid.audioExtensions.includes(link.slice(link.lastIndexOf('.') + 1)),
+	audioExtensions: ['mp3', 'ogg', 'wav', 'aac', 'flac'],
+	getFileUrl: index => './files/' + vid.URL[index],
+	isAudio: link => vid.audioExtensions.includes(link.slice(link.lastIndexOf('.') + 1)),
 }
 
-if(vid.isAudio(vid.URL[0])) {
+if (vid.isAudio(vid.URL[0])) {
 	currentPlayer = audioPlayer
-}
-else {
+} else {
 	currentPlayer = videoPlayer
 }
 
@@ -64,11 +70,11 @@ document.addEventListener('keydown', e => {
 			}
 			break
 		case 'KeyS':
-      dataVisibility();
+			dataVisibility()
 			break
 		case 'KeyH':
-      hideCoursor()
-      break;
+			hideCoursor()
+			break
 		case 'Comma':
 			if (currVid !== 0) {
 				changeVid(--currVid)
@@ -81,39 +87,50 @@ document.addEventListener('keydown', e => {
 				changeVid(++currVid)
 			}
 			break
+		case 'KeyM':
+			if (vid.URL.length - 1 !== currVid) {
+				hideVid()
+				changeVid(++currVid, false)
+			}
+			break
+		case 'KeyN':
+			if (currVid !== 0) {
+				changeVid(--currVid, false)
+				hideVid()
+			}
+			break
 	}
 })
-const updateProgressBar = () =>	playBarEl.value = (currentPlayer.currentTime / currentPlayer.duration) * 100
-
+const updateProgressBar = () => (playBarEl.value = (currentPlayer.currentTime / currentPlayer.duration) * 100)
 
 const hideCoursor = () => {
-  if (document.body.style.cursor === 'none') {
-    document.body.style.cursor = 'auto'
-  } else {
-    document.body.style.cursor = 'none'
-  }
+	if (document.body.style.cursor === 'none') {
+		document.body.style.cursor = 'auto'
+	} else {
+		document.body.style.cursor = 'none'
+	}
 }
 
 const dataVisibility = () => {
-  if (showCurrVidEl.style.opacity === '1') {
-    showCurrVidEl.style.opacity = '0'
-    playBarEl.style.display = 'none'
-  } else {
-    showCurrVidEl.style.opacity = '1'
-    playBarEl.style.display = 'block'
-  }
+	if (showCurrVidEl.style.opacity === '1') {
+		showCurrVidEl.style.opacity = '0'
+		playBarEl.style.display = 'none'
+	} else {
+		showCurrVidEl.style.opacity = '1'
+		playBarEl.style.display = 'block'
+	}
 }
 
-async function changeVid(index,soundFading=true) {
+async function changeVid(index, soundFading = true) {
 	const vidURL = vid.getFileUrl(index)
 	if (soundFading) await lowerSound()
-		updatePlayer(vidURL);
-		currentPlayer.src = vidURL
-		showCurrVidEl.textContent = vid.URL[index]
-		currentPlayer.currentTime = 0.1
-		playBarEl.max = currentPlayer.duration
-		console.log(vid.URL[index])
-		updateProgressBar()
+	updatePlayer(vidURL)
+	currentPlayer.src = vidURL
+	showCurrVidEl.textContent = vid.URL[index]
+	currentPlayer.currentTime = 0.1
+	playBarEl.max = currentPlayer.duration
+	console.log(vid.URL[index])
+	updateProgressBar()
 }
 
 const hideVid = () => {
@@ -124,19 +141,12 @@ const showVid = () => {
 	videoHider.classList.add('hidden')
 	videoHider.classList.remove('shown')
 }
-const updatePlayer = (vidLink) => {
+const updatePlayer = vidLink => {
 	if (vid.isAudio(vidLink)) {
-	   currentPlayer.removeEventListener('ended', hideVid);
-	   currentPlayer.removeEventListener('play', showVid);
-	   currentPlayer = audioPlayer;
+		currentPlayer = audioPlayer
 	} else {
-	   currentPlayer.removeEventListener('ended', hideVid);
-	   currentPlayer.removeEventListener('play', showVid);
-	   currentPlayer = videoPlayer;
+		currentPlayer = videoPlayer
 	}
-	currentPlayer.addEventListener('ended', () => {
-		hideVid()
-	})
 	currentPlayer.addEventListener('play', () => {
 		currentPlayer.volume = 1
 		if (!vid.isAudio(vid.URL[currVid])) showVid()
@@ -145,23 +155,25 @@ const updatePlayer = (vidLink) => {
 		const seekTime = (playBarEl.value / 100) * currentPlayer.duration
 		currentPlayer.currentTime = seekTime
 	})
-	currentPlayer.addEventListener('ended',()=>{
-		changeVid(currVid === vid.URL.length - 1 ? currVid : ++currVid,false)
+	currentPlayer.addEventListener('ended', () => {
+		if (vid.isAudio(vid.URL[currVid])) {
+			changeVid(currVid === vid.URL.length - 1 ? currVid : ++currVid, false)
+		}
 	})
 	currentPlayer.addEventListener('timeupdate', updateProgressBar)
 }
-updatePlayer(vid.getFileUrl(0));
+updatePlayer(vid.getFileUrl(0))
 const lowerSound = (lowerTo = 0) => {
-  return new Promise (resolve => {
-  let vol = 1000
-	const sound = setInterval(() => {
-		if (vol <= 0 + lowerTo) {
-			clearInterval(sound)
-      resolve()
-		}
-		vol -= 2
-		currentPlayer.volume = vol <= 0 ? 0 : Number('0.' + `${vol}`.padStart(3, '0'))
-		if (vol % 100 === 0) console.log(currentPlayer.volume * 10)
-	}, 1)
-  })
+	return new Promise(resolve => {
+		let vol = 1000
+		const sound = setInterval(() => {
+			if (vol <= 0 + lowerTo) {
+				clearInterval(sound)
+				resolve()
+			}
+			vol -= 2
+			currentPlayer.volume = vol <= 0 ? 0 : Number('0.' + `${vol}`.padStart(3, '0'))
+			if (vol % 100 === 0) console.log(currentPlayer.volume * 10)
+		}, 1)
+	})
 }
