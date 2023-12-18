@@ -10,3 +10,5 @@
 + SPACJA - Zapałzowanie klipu
 + Strzałka w lewo - 5 sekund do tyłu
 - Strzałka w prawo - 5 sekund do przodu
++ N - Poprzedni klip (szybko)
++ M - Następny klip (szybko)

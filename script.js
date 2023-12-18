@@ -35,6 +35,7 @@ if (vid.isAudio(vid.URL[0])) {
 
 currentPlayer.src = vid.getFileUrl(0)
 showCurrVidEl.textContent = vid.URL[0]
+console.log(vid.URL[0])
 
 currentPlayer.currentTime = 0.1
 
@@ -90,12 +91,14 @@ document.addEventListener('keydown', e => {
 		case 'KeyM':
 			if (vid.URL.length - 1 !== currVid) {
 				hideVid()
+				currentPlayer.pause()
 				changeVid(++currVid, false)
 			}
 			break
 		case 'KeyN':
 			if (currVid !== 0) {
 				changeVid(--currVid, false)
+				currentPlayer.pause()
 				hideVid()
 			}
 			break
