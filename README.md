@@ -12,3 +12,4 @@
 - Strzałka w prawo - 5 sekund do przodu
 + N - Poprzedni klip (szybko)
 + M - Następny klip (szybko)
++ P - Wyciesznie do 0.1

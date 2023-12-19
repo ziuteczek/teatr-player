@@ -18,7 +18,8 @@ const vid = {
 		'3. Ave Verum by Albinoni (Adagio in G Minor).mp4',
 		'4. Bóg jest Miłością-(480p).mp4',
 		'5. Umieram w twoim ubraniu GITES MAJONEZ.mp3',
-		'6. Przybieżeli do Betlejem.mp4',
+		'6. Pieśń o miłości.mp3',
+		'7. Przybieżeli do Betlejem.mp4',
 	],
 	audioExtensions: ['mp3', 'ogg', 'wav', 'aac', 'flac'],
 	getFileUrl: index => './files/' + vid.URL[index],
@@ -101,7 +102,7 @@ document.addEventListener('keydown', e => {
 			}
 			break
 		case 'KeyP':
-			lowerSound(200)
+			lowerSound(100)
 	}
 })
 const updateProgressBar = () => (playBarEl.value = (currentPlayer.currentTime / currentPlayer.duration) * 100)
