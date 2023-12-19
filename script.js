@@ -46,7 +46,7 @@ function playPause() {
 		currentPlayer.pause()
 	}
 }
-document.addEventListener('keydown', e => {
+document.addEventListener('keydown',async function (e) {
 	switch (e.code) {
 		case 'Space':
 			playPause()
@@ -103,8 +103,8 @@ document.addEventListener('keydown', e => {
 			}
 			break
 		case 'KeyP':
-			lowerSound(100)
-			break
+			await lowerSound(100)
+			break 
 	}
 })
 const updateProgressBar = () => (playBarEl.value = (currentPlayer.currentTime / currentPlayer.duration) * 100)
@@ -171,6 +171,7 @@ const updatePlayer = vidLink => {
 updatePlayer(vid.getFileUrl(0))
 const lowerSound = (lowerTo = 0) => {
 	return new Promise(resolve => {
+		// Change vid hider hider duration
 		let vol = 1000 * currentPlayer.volume
 		const sound = setInterval(() => {
 			if (vol <= 0 + lowerTo) {
