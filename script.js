@@ -20,6 +20,7 @@ const vid = {
 		'5. Umieram w twoim ubraniu GITES MAJONEZ.mp3',
 		'6. Pieśń o miłości.mp3',
 		'7. Przybieżeli do Betlejem.mp4',
+		'99. Gragas wytacza beczkę - greenscreen.mp4',
 	],
 	audioExtensions: ['mp3', 'ogg', 'wav', 'aac', 'flac'],
 	getFileUrl: index => './files/' + vid.URL[index],
@@ -103,6 +104,7 @@ document.addEventListener('keydown', e => {
 			break
 		case 'KeyP':
 			lowerSound(100)
+			break
 	}
 })
 const updateProgressBar = () => (playBarEl.value = (currentPlayer.currentTime / currentPlayer.duration) * 100)
