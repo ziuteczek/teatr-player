@@ -13,14 +13,7 @@ let currVid = 0
 
 const vid = {
 	URL: [
-		'1. Wspolczesna_kolenda(edit).mp4',
-		'2. Rozmowa EDIT TELPHONE 2 2.mp3',
-		'3. Ave Verum by Albinoni (Adagio in G Minor).mp4',
-		'4. Bóg jest Miłością-(480p).mp4',
-		'5. Umieram w twoim ubraniu GITES MAJONEZ.mp3',
-		'6. Pieśń o miłości.mp3',
-		'7. Przybieżeli do Betlejem.mp4',
-		'99. Gragas wytacza beczkę - greenscreen.mp4',
+		"1. Wspolczesna_kolenda(edit).mp4","2. Rozmowa EDIT TELPHONE 2 2.mp3","3. Ave Verum by Albinoni (Adagio in G Minor).mp4","4. Bóg jest Miłością-(480p).mp4","5. Pieśń o miłości.mp3","6. Przybieżeli do Betlejem.mp4","99. Gragas wytacza beczkę - greenscreen.mp4"
 	],
 	audioExtensions: ['mp3', 'ogg', 'wav', 'aac', 'flac'],
 	getFileUrl: index => './files/' + vid.URL[index],
