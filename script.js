@@ -103,7 +103,7 @@ document.addEventListener('keydown',async function (e) {
 			}
 			break
 		case 'KeyP':
-			await lowerSound(100)
+			await lowerSound(200)
 			break 
 	}
 })
@@ -171,11 +171,12 @@ const updatePlayer = vidLink => {
 updatePlayer(vid.getFileUrl(0))
 const lowerSound = (lowerTo = 0) => {
 	return new Promise(resolve => {
-		// Change vid hider hider duration
+		videoHider.style.transition = `${10 * currentPlayer.volume}s opacity`;
 		let vol = 1000 * currentPlayer.volume
 		const sound = setInterval(() => {
 			if (vol <= 0 + lowerTo) {
 				clearInterval(sound)
+				videoHider.style.transition = "auto"
 				resolve()
 			}
 			vol -= 2
